@@ -27,7 +27,7 @@ pipeline {
    stage('Create Docker Image') {
       steps {
         echo 'Create a Docker Image'
-        sh 'docker build -t rnavindevops/insure-project:1.0'
+        sh 'docker build -t rnavindevops/insure-project:1.0 .'
             }
     }
      stage('Docker Login') {
