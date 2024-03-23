@@ -1,5 +1,5 @@
 provider "aws" {
-  default     = "ap-south-1"
+  region     = "ap-south-1"
 }
 
 resource "aws_instance" "sample_machine"{
