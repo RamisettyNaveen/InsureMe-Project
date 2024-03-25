@@ -30,7 +30,7 @@ pipeline {
         sh 'docker build -t rnavindevops/insure-me:1.0 .'
             }
     }
-     stage('Docker Login') {
+     stage('dockerlogin') {
     steps {
         echo 'dockerlogin'
         withCredentials([usernamePassword(credentialsId: 'Dockerlogin', passwordVariable: 'dockerhub_pass', usernameVariable: 'dockerhub_user')])  {
