@@ -44,5 +44,11 @@ pipeline {
         sh 'docker push rnavindevops/insure-project:latest'
                    }
             }
+     stage('Ansible config and Deployment') {
+      steps {
+        echo 'Push a Docker Image'
+        ansiblePlaybook credentialsId: 'jenkins', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible.yml', vaultTmpPath: ''
+                   }
+            }
     }
 }
