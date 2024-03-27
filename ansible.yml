@@ -1,5 +1,5 @@
 - name: Docker configure in EC2 Machine
-  hosts: [webservers]
+  hosts: 172.31.45.5
   become: true
   connection: ssh
   tasks: 
