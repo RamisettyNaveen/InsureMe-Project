@@ -44,5 +44,12 @@ pipeline {
         sh 'docker push rnavindevops/insure-me:1.0'
                    }
             }
+     stage('Ansible config and Deployment') {
+       steps {
+         ansiblePlaybook credentialsId: 'ansible-ssh', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible.yml', vaultTmpPath: ''
+            }
+       }
     }
+}
+  }
 }
