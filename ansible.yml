@@ -1,17 +1,17 @@
 - name: Docker configure in EC2 Machine
   hosts: all
   become: true
-  connection: ssh
-  tasks: 
-    - name: updating the new EC2 Machine
-      command: sudo apt-get update
-    - name: Install docker
-      command: sudo apt-get install docker -y
-      become: yes
-      become_user: root
-      
-    - name: start docker service
-      command: sudo systemctl start docker
-      become: yes
-      become_user: root
+  tasks:
+    - name: Updating the new EC2 Machine
+      apt:
+        update_cache: yes
 
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
