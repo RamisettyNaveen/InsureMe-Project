@@ -15,7 +15,18 @@
       service:
         name: docker
         state: started
+    
+    - name: Pull Docker image
+      docker_image:
+        name: rnavindevops/insure-me
+        tag: "1.0"
+        source: pull
 
-        
-    - name: Deploy the image and run as container
-      command: docker run -itd -p 8085:8082 rnavindevops/insure-me:1.0
+    - name: Run Docker container
+      docker_container:
+        name: insure-me-container
+        image: rnavindevops/insure-me:1.0
+        state: started
+        restart_policy: always
+        published_ports:
+          - "9095::9092"
