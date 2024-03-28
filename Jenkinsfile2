@@ -29,20 +29,6 @@ pipeline {
         echo 'Create a Docker Image'
         sh 'docker build -t rnavindevops/insureme-app:1.0 .'
             }
-    }
-     stage('Docker Login') {
-       steps {
-        echo 'Docker Login'
-         withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'dockerhub-pass', usernameVariable: 'dockerhub-user')]) { 
-            sh "docker login -u ${dockerhub-user} -p ${dockerhub-pass}"
-        }
-    }
-}
-     stage('Push Docker Image') {
-      steps {
-        echo 'Push a Docker Image'
-        sh 'docker push rnavindevops/insureme-app:1.0'
-                   }
-            }
      }
+  }
 }
