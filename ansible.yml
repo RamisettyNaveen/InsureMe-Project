@@ -18,15 +18,15 @@
     
     - name: Pull Docker image
       docker_image:
-        name: rnavindevops/insure-me
+        name: rnavindevops/insureme-project
         tag: "1.0"
         source: pull
 
     - name: Run Docker container
       docker_container:
         name: insure-me-container
-        image: rnavindevops/insure-me:1.0
+        image: rnavindevops/insureme-project:1.0
         state: started
         restart_policy: always
         published_ports:
-          - "9095:9092"
+          - "8085:8081"
