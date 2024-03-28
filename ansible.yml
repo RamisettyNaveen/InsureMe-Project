@@ -15,5 +15,8 @@
       service:
         name: docker
         state: started
+
+    - name: Deploy the image and run as container
+      command: docker run -itd -p 8084:8081
   
       
