@@ -15,12 +15,3 @@
       service:
         name: docker
         state: started
-
-    - name: Run Docker container
-      docker_container:
-        name: insure-me-container
-        image: rnavindevops/insureme-project:1.0
-        state: started
-        restart_policy: always
-        published_ports:
-          - "8084:8082"
