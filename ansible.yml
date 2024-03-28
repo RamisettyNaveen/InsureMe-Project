@@ -29,4 +29,4 @@
         state: started
         restart_policy: always
         published_ports:
-          - "9095::9092"
+          - "9095:9092"
