@@ -15,8 +15,5 @@
       service:
         name: docker
         state: started
-    
-    - name: Deploy the image and run as container
-      command: docker run -itd -p 8085:8082 rnavindevops/insureme-project:1.0
-
+  
       
