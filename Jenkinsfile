@@ -30,7 +30,7 @@ pipeline {
         sh 'docker build -t rnavindevops/insureme-project:1.0 .'
             }
     }
-     stage('Docker Login') {
+   stage('Docker Login') {
     steps {
         echo 'Docekr Login'
         withCredentials([usernamePassword(credentialsId: 'dockerlogin', passwordVariable: 'dockerhub_pass', usernameVariable: 'dockerhub_user')])  {
@@ -38,13 +38,13 @@ pipeline {
         }
     }
 }
-     stage('Push Docker Image') {
+   stage('Push Docker Image') {
       steps {
         echo 'Push a Docker Image'
         sh 'docker push rnavindevops/insureme-project:1.0'
                    }
             }
-     stage('Ansible config and Deployment') {
+   stage('Ansible config and Deployment') {
        steps {
           ansiblePlaybook credentialsId: 'ansible-ssh', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible.yml', vaultTmpPath: ''
             }
