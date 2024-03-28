@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+
+  tools {
+    maven 'M2_HOME'
+    }
+  
+  stages {
+   stage('CheckOut') {
+      steps {
+        echo 'Checkout the source code from GitHub'
+        git branch: 'main', url: 'https://github.com/RamisettyNaveen/InsureMe-Project'
+            }
+    }
+   stage('Package') {
+      steps {
+        echo 'Generate a jar file the package using Maven'
+        sh 'mvn clean package'
+            }
+    }
+   stage('Publish TestNG report') {
+      steps {
+        echo 'Generate a TestNG report'
+        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/InsureMe-Project/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+            }
+       }
+   }
+}
