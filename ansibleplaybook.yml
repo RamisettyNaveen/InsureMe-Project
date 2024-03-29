@@ -20,10 +20,14 @@
       when: docker_version.rc != 0
       become: true
 
-    - name: Start Docker Service
+   - name: Start Docker Service
       systemd:
         name: docker
         state: started
         enabled: yes
       become: true
+      
+   - name: Deploy the Image and Run as Container
+    command: docker run -itd -p 8084:8081 rnavindevops/insureme-app:1.0
+    
 
