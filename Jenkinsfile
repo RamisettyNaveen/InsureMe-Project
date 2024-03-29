@@ -27,7 +27,7 @@ pipeline {
    stage('Create Docker Image') {
       steps {
         echo 'Create a Docker Image'
-        sh 'docker build -t rnavindevops/insureme-project:1.0 .'
+        sh 'docker build -t rnavindevops/insure-me:1.0 .'
             }
     }
    stage('Docker Login') {
@@ -41,7 +41,7 @@ pipeline {
    stage('Push Docker Image') {
       steps {
         echo 'Push a Docker Image'
-        sh 'docker push rnavindevops/insureme-project:1.0'
+        sh 'docker push rnavindevops/insure-me:1.0'
                    }
             }
    stage('Ansible config and Deployment') {
