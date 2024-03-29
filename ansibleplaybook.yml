@@ -1,0 +1,17 @@
+- name: Docker Configure in EC2 Machine
+  hosts: all
+  become: true
+  connection: ssh
+  tasks: 
+  - name: updating the New EC2 Machine
+    command: sudo yum update
+  
+  - name: Install Docker
+    command: yum install docker -y
+    become: yes
+    become_user: root
+  
+  - name: Start Docker Service
+    command: sudo systemctl start docker
+    become: yes
+    become_user: root
