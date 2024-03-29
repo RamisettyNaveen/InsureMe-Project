@@ -3,15 +3,27 @@
   become: true
   connection: ssh
   tasks: 
-  - name: updating the New EC2 Machine
-    command: sudo yum update
-  
-  - name: Install Docker
-    command: yum install docker -y
-    become: yes
-    become_user: root
-  
-  - name: Start Docker Service
-    command: sudo systemctl start docker
-    become: yes
-    become_user: root
+    - name: Update the New EC2 Machine
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Check if Docker is installed
+      command: docker --version
+      register: docker_version
+      ignore_errors: true
+
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+      when: docker_version.rc != 0
+      become: true
+
+    - name: Start Docker Service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+      become: true
+
