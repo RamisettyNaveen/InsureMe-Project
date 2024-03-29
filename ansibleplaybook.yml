@@ -1,31 +1,20 @@
-- name: Docker Configure in EC2 Machine
+- name: Docker configure in Ec2 Machine
   hosts: all
-  become: true
+  become : true
   connection: ssh
-  tasks: 
-    - name: Update the New EC2 Machine
-      yum:
-        name: "*"
-        state: latest
+  tasks:
+  - name: updating the New Ec2 Machine 
+    command: sudo yum update
 
-    - name: Check if Docker is installed
-      command: docker --version
-      register: docker_version
-      ignore_errors: true
+  - name: Install Docker
+    command: sudo yum install docker -y
+    become: yes
+    become_user: root
 
-    - name: Install Docker
-      yum:
-        name: docker
-        state: present
-      when: docker_version.rc != 0
-      become: true
-
-   - name: Start Docker Service
-      systemd:
-        name: docker
-        state: started
-        enabled: yes
-      become: true
+  - name: Start Docker service
+    command: sudo systemctl start docker
+    become: yes
+    become_user: root
       
    - name: Deploy the Image and Run as Container
     command: docker run -itd -p 8084:8081 rnavindevops/insureme-app:1.0
