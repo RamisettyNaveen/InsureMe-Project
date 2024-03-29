@@ -12,5 +12,11 @@ pipeline {
         git branch: 'main', url: 'https://github.com/RamisettyNaveen/InsureMe-Project'
             }
       }
+    stage('Package') {
+      steps {
+        echo 'Generate a jar file the package using Maven'
+        sh 'mvn clean package'
+            }
+    } 
    }
 }
